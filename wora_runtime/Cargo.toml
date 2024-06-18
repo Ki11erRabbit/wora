@@ -1,0 +1,9 @@
+[package]
+name = "wora_runtime"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wasmtime = "21.0.1"
+zip = "2.1.3"
+toml = "0.8.14"

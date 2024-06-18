@@ -1,0 +1,16 @@
+[package]
+name = "foo"
+version = "0.1.0"
+
+[lib]
+name = "foo"
+provides = [
+    { name = "foo", args = [], returns = "i32" }
+]
+
+[build]
+compiler = "emcc"
+flags = ["-s", "WASM=1"]
+
+[dependencies]
+regex = { git = "some git repo", branch = "some branch", tag = "some tag", commit = "2qwat33aw3" }

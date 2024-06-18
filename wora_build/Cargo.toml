@@ -1,0 +1,8 @@
+[package]
+name = "wora_build"
+vesion = "0.1.0"
+edition = "2021"
+
+[dependencies]
+zip = "2.1.3"
+toml = "0.8.14"

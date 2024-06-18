@@ -1,0 +1,16 @@
+[package]
+name = "my_package"
+version = "0.1.0"
+
+
+
+
+[bin]
+main = "main"
+path = "bin/main"
+
+[lib]
+provides = [
+    { name = "foo", args = [], returns = "i32"}
+]
+
