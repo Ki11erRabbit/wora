@@ -3,7 +3,6 @@ name = "foo"
 version = "0.1.0"
 
 [lib]
-name = "foo"
 provides = [
     { name = "foo", args = [], returns = "i32" }
 ]
