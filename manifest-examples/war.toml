@@ -12,5 +12,6 @@ path = "bin/main"
 [lib]
 provides = [
     { name = "foo", args = [], returns = "i32"}
+    
 ]
 

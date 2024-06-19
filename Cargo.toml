@@ -2,7 +2,11 @@
 members = [
     "wora_runtime",
     "wora_build",
-    "war"
+    "utils"
 ]
+
+
+[workspace.dependencies]
+utils = { path = "utils" }
 
 

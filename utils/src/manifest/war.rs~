@@ -1,5 +1,5 @@
 
-use crate::manifest::Function;
+use crate::Module;
 
 
 pub struct WarPackage {
@@ -20,7 +20,7 @@ impl WarPackage {
         }
     }
 
-    pub fn new_library(name: String, version: String, provides: Vec<Function>) -> WarPackage {
+    pub fn new_library(name: String, version: String, provides: Vec<Module>) -> WarPackage {
         WarPackage {
             name,
             version,
@@ -39,7 +39,7 @@ impl WarPackage {
             let path = bin.get("path")?.as_str()?.to_string();
             PackageType::Binary(BinaryPackage { main_function, path })
         } else if let Some(lib) = package.get("lib") {
-            let provides = lib.get("provides")?.as_array()?.iter().map(|v| Function::parse(v.as_table().unwrap()).unwrap()).collect();
+            let provides = lib.get("provides")?.as_array()?.iter().map(|v| Module::parse(v.as_table().unwrap()).unwrap()).collect();
             PackageType::Library(LibraryPackage { provides })
         } else {
             return None;
@@ -94,14 +94,14 @@ impl std::fmt::Display for BinaryPackage {
 }
 
 struct LibraryPackage {
-    provides: Vec<Function>,
+    provides: Vec<Module>,
 }
 
 impl std::fmt::Display for LibraryPackage {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         write!(f, "provides = [")?;
-        for (i, function) in self.provides.iter().enumerate() {
-            write!(f, "    {}", function)?;
+        for (i, modules) in self.provides.iter().enumerate() {
+            write!(f, "    {}", modules)?;
             if i < self.provides.len() - 1 {
                 write!(f, ",")?;
             }

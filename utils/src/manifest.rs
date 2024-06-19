@@ -63,6 +63,35 @@ impl std::fmt::Display for GitDependency {
     }
 }
 
+pub struct Module {
+    path: String,
+    functions: Vec<Function>,
+}
+
+impl Module {
+    pub fn parse(table: &toml::Table) -> Option<Module> {
+        let path = table.get("path")?.as_str()?.to_string();
+        let functions = table.get("functions")?.as_array()?.iter().map(|f| Function::parse(f.as_table().unwrap()).unwrap()).collect();
+        Some(Module { path, functions })
+    }
+}
+
+impl std::fmt::Display for Module {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{{ ")?;
+        write!(f, "path = \"{}\", ", self.path)?;
+        write!(f, "functions = [\n")?;
+        for (i, function) in self.functions.iter().enumerate() {
+            write!(f, "        {}, ", function)?;
+            if i < self.functions.len() - 1 {
+                write!(f, ",\n")?;
+            }
+        }
+        write!(f, "    ]")?;
+        write!(f, "}}")
+    }
+}
+
 pub struct Function {
     name: String,
     args: Vec<String>,
