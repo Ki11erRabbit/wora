@@ -60,6 +60,19 @@ impl WarPackage {
             _ => false,
         }
     }
+
+    pub fn get_main_function(&self) -> Option<&str> {
+        match &self.package {
+            PackageType::Binary(bin) => Some(&bin.main_function),
+            _ => None,
+        }
+    }
+    pub fn get_path(&self) -> Option<&str> {
+        match &self.package {
+            PackageType::Binary(bin) => Some(&bin.path),
+            _ => None,
+        }
+    }
 }
 
 impl std::fmt::Display for WarPackage {
