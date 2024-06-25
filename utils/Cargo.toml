@@ -1,11 +1,11 @@
 [package]
-name = "war"
+name = "utils"
 version = "0.1.0"
 edition = "2021"
 
 
 [lib]
-name = "war"
+name = "utils"
 crate-type = ["rlib"]
 
 [dependencies]

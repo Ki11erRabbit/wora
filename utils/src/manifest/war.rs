@@ -1,6 +1,6 @@
 
 use crate::Module;
-
+use crate::Function;
 
 pub struct WarPackage {
     name: String,
@@ -34,12 +34,13 @@ impl WarPackage {
         let package = table.get("package")?.as_table()?;
         let name = package.get("name")?.as_str()?.to_string();
         let version = package.get("version")?.as_str()?.to_string();
-        let package = if let Some(bin) = package.get("bin") {
-            let main_function = bin.get("name")?.as_str()?.to_string();
+        let package = if let Some(bin) = table.get("bin") {
+            println!("bin");
+            let main_function = bin.get("main")?.as_str()?.to_string();
             let path = bin.get("path")?.as_str()?.to_string();
             PackageType::Binary(BinaryPackage { main_function, path })
-        } else if let Some(lib) = package.get("lib") {
-            let provides = lib.get("provides")?.as_array()?.iter().map(|v| Module::parse(v.as_table().unwrap()).unwrap()).collect();
+        } else if let Some(lib) = table.get("lib") {
+            let provides = lib.get("provides")?.as_array()?.iter().map(|v| Function::parse(v.as_table().unwrap()).unwrap()).collect();
             PackageType::Library(LibraryPackage { provides })
         } else {
             return None;

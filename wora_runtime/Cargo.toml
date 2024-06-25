@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+anyhow = "1.0.86"
 wasmtime = "21.0.1"
 wasi-common = "21.0.1"
 zip = "2.1.3"

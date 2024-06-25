@@ -15,4 +15,6 @@ struct Args {
 fn main() {
     let args = Args::parse();
     println!("{:?}", args);
+
+    crate::war::run_wasm_archive(&args.files[0]).unwrap();
 }
